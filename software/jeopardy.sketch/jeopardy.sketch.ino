@@ -39,14 +39,14 @@ void flashAllLEDs() {
 
 
 void startRound() {
-  Serial.println("GO GO GO!");
+  //Serial.println("GO GO GO!");
   flashAllLEDs();
   winner = -1;
 }
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("Setup");
+  //Serial.println("Setup");
   pinMode( resetButton, INPUT );
   initialisePINs();
   flashAllLEDs();
@@ -56,18 +56,14 @@ void setup() {
 }
 
 void loop() {
-  if(winner == -1){
-    for(int i=0; i < userCount; i++){
+  for(int i=0; i < userCount; i++){
+    if(winner == -1){
       if(digitalRead(buttonUsers[i])){
         winner = i;
         Serial.println(winner);
 	      digitalWrite(buttonLEDUser[i], HIGH);
 		    digitalWrite(ledUser[i], HIGH);
-	      delay(3000);
-        startRound();
-	      break;
       }
-      Serial.println(digitalRead(buttonUsers[i]));
     }
   }
 }
